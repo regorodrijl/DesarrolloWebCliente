@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Task 3.2</title>
+</head>
+<body>
+	<script>
+
+		var nuervaV = window.open("","v1","height=400,width=800");
+		f1();
+		function f1(){
+			nuervaV.document.write("<h3> Nueva ventana Ejemplo </ h3>");
+			nuervaV.document.write("<br>Escriba la dirección URL completa: "+nuervaV.location.href);
+			nuervaV.document.write("<br>Escribe el protocolo utilizado: "+nuervaV.location.protocol);
+			nuervaV.document.write("<br>Escribe el nombre de código del explorador: "+nuervaV.navigator.appCodeName);
+			nuervaV.document.write("<br>Compruebe si JAVA está disponible: "+nuervaV.navigator.javaEnabled());
+
+			if (nuervaV.navigator.javaEnabled()) {
+				nuervaV.alert("Java ES disponibles en esta ventana");
+			}
+			else nuervaV.alert("Java NO disponibles en esta ventana");
+		}
+		
+		document.write("<h1> TAREA DWEC03 </ h1> <hr />");
+		var nome= prompt("Nome: ");
+		var dia =prompt("Día de cumpleños: ");
+		var mes =prompt("Mes de cumpleños: ");
+		var ano =prompt("Año de cumpleños: ");
+		document.write("<br>Buenos días "+nome);
+		document.write("<br>Su nombre es caracteres "+ nome.length +" largo, incluidos los espacios.");
+		document.write("<br> La primera letra 'A' de su nombre está en la posición: "+nome.indexOf('a'));
+		document.write("<br> La última letra 'A' de su nombre está en la posición: "+nome.lastIndexOf('a'));
+		document.write("<br> Su nombre sin las primeras 3 letras es: "+nome.slice(3));
+		document.write("<br> Su nombre en mayúsculas es: "+nome.toUpperCase());
+		
+		var anoActual = new Date().getFullYear();
+		var mesActual = new Date().getMonth();
+		var diaActual = new Date().getDate();
+		var cumpleAno = anoActual - ano ;
+		
+
+		if (mes == mesActual) {
+			if (dia>diaActual) {
+				cumpleAno--;
+			};
+		};
+		if (mes > mesActual) {
+			cumpleAno--;
+		};
+
+		document.write("<br> Su edad es: "+ cumpleAno+" años de edad.");
+
+		var fechaCompleta = new Date(ano,mes-1,dia);
+		
+		var meses=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+		var dias=["Lunes","Martes","Miércoles","Jueves","Sabado","Domingo"];
+		for (var i = 0; i <= dias.length; i++) {
+			if (i== fechaCompleta.getDay()){
+				var d = dias[i-1];
+			};
+		}
+		for (var i = 0; i <= meses.length; i++) {
+			if (i==fechaCompleta.getMonth()) {
+				var m = meses[i];
+			};
+		}
+		document.write("<br> Usted nació en un "+d +" de "+m+" de "+fechaCompleta.getFullYear());
+		document.write("<br>El coseno de 180 es: "+Math.cos(180));
+		
+		document.write("<br> El mayor número (34,67,23,75,35,19) es: "+Math.max(34,67,23,75,35,19));
+		document.write("<br> Ejemplo de números aleatorios: "+Math.random());
+
+	</script>
+
+</body>
+</html>
