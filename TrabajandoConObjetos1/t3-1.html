@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>T 3.1</title>
+</head>
+<body>
+	<script >
+		var d = new Date(2010,0,1,00,00,00,00);
+	//alert(d.getTime());
+	//alert(d);
+	var actual = new  Date().getTime();
+	//alert(actual);
+	document.write("<p id='todo'>La resta desde 00:00 1st January 2010 hasta la hora actual es: "+(actual-d)+"</p>");
+
+	var str =prompt("Introduce una cadena: ");
+	if(str=="")
+		str =prompt("Introduce algo: ");
+	else
+		document.write("<br>Longitud de la cadena: "+str.length);
+	var altura= screen.height;
+	var ancho=  screen.width;
+	document.write("<br>La diagonal de la pantalla es: "+(Math.sqrt(ancho*ancho+altura*altura)));
+
+	var nif = prompt("Escribe tu DNI con letra: ");
+	var dni1 = nif.substr(0,8);
+	var letra = nif.substr(8,1);
+	//alert(dni1);
+	//alert(letra);
+
+
+	var rest = dni1 % 23;
+	var letras=["T","R","W","A","G","M","Y","F","P","D","X","B","N","J","Z","S","Q","V","H","L","C","K","E"];
+	if (letra==letras[rest]) {};
+	alert("POR ARRAY. La letra del dni es: "+letras[rest]);
+
+
+	if (letra==letraDni(dni1)) {
+		alert("DNI Correcto.");
+	}else alert("DNI Falso.");
+	alert("POR FUNCION. La letra del dni es : "+letraDni(dni1));
+
+	function letraDni(dni) {
+		return "TRWAGMYFPDXBNJZSQVHLCKE".charAt(dni % 23);
+	}
+
+
+	document.body.style.backgroundColor = "grey";
+	document.title="Tarea 3.1 - Modelo de objetos predefinidos con JavaScript";
+	document.getElementById("todo").style.color="white";
+</script>
+</body>
+</html>
