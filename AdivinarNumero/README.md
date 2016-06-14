@@ -18,6 +18,7 @@ Al terminar la aplicación mostrará:
 La introducción de letras no está permitida y contará como respuesta incorrecta.
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 Description:
 Guessing numbers:
 Create a JavaScript application that generates random numbers between 0 and 25 .
