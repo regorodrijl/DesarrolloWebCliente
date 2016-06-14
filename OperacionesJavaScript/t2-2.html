@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tarea 2.2 - Operaciones con JavaScript</title>
+</head>
+<body>
+	<table border="2">
+		<tr>
+			<td colspan="5" ><script>document.write("Tabla de multiplicar del 7.");</script></td>
+			<td colspan="3"><script>document.write("Tabla de sumar del 8.");</script></td>
+			<td><script>document.write("Tabla de dividir del 9.");</script></td>
+		</tr >
+		
+		<script>
+			for (i=1; i <= 10; i++) {
+				document.write("<tr><td align='center'>7<td align='center'>*</td><td align='center'>" +i+" </td><td align='center'>=</td> </td><td align='center'>"+7*i+"</td><td align='center'>8+" ,i,"<td align='center'> = </td></td><td align='center'>",8+i,"</td><td align='center'>  9/" ,i," = ",9/i ,  "</td> </tr>");
+			}
+		</script>		
+	</table>
+
+	<script>
+
+		document.write("Tabla de sumar del 8.");
+		var k=1;
+		while( k <= 10) {
+			document.write("<br>8+" ,k," = ",8+k);
+			k++;
+		}
+		document.write("Tabla de dividir del 9.");
+		var j=1;
+		do{
+			document.write("<br>9/" ,j," = ",9/j);
+			j++;
+		}while(j <= 10)
+		document.write("<br>Desplazando bits. Derecha dividimos entre 2 Izquierda multiplicando por 2.");//potencias de 2.
+
+		document.write("<br>125 / 8 = ",125>>3);
+		document.write("<br>40 * 4 = ",40<<2);
+		document.write("<br>25 / 2 = ",25>>1);
+		document.write("<br>10 * 16 = ",10<<4);
+	</script>
+</body>
+</html>
