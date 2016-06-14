@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		alert("Vamos a adivinar un numero del 0 al 25");
+		var num= Math.floor((Math.random() * 25)); // 2;
+		var i=5;
+		var dato=prompt("Escribe un numero para adivinar el generado: ","");
+		i--;
+		do{	
+			if (dato !="" && dato != null){ //escribe algo
+				if(isNaN(dato)==true) {//no es numero
+					dato = prompt("Escribe un numero NO otra cosa tiene "+i+" intentos","");
+					i--;
+				}
+				else{ 
+					dato =  parseInt(dato);
+					if (dato === num) break;
+					if (dato>num) {
+						dato = prompt("el numero es MENOR vuelva a escribir un numero tiene "+i+" intentos","");
+						i--;
+					}else 
+					if (dato<num){
+						dato = prompt("el numero es MAYOR vuelva a escribir un numero tiene "+i+" intentos","");
+						i--;
+					} 
+				}
+			}else
+			if (dato=="") dato = prompt("No has escrito nada.Escribe algo: ","") ;
+			else if(dato===null) {
+				alert("Adios.");
+				break;
+			} 
+		}while(i>=1 || dato === num);
+		if (i==0) {
+			alert("HAS PERDIDO 5 intentos,recarga para volver empezar.");
+			location.reload();
+		}
+		else if (dato == num)  
+			alert("Has Ganado. Intentos totales = "+i+" \n % de fallos = "+((5-i)*100)/5)+" %";
+	</script>
+</body>
+</html>
