@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Working with JSON</title>
+</head>
+<body>
+
+   <script>
+// Responde a la siguiente pregunta: ¿Qué significan las siglas JSON?
+//significa JSON (JavaScript Object Notation)
+
+// ¿Cómo representarías este objeto en formato JSON?
+/*
+ var persona = new Object();
+ persona.edad = 23;
+ persona.altura = 170;
+ */
+
+ var persona={"edad":23,"altura":170};
+
+/*
+ - Asignar el contenido JSON que está más abajo a un objeto.
+ - Imprimir todas las propiedades de GlossDiv
+ - Imprimir el contenido del campo "title".
+ - Imprimir el contenido del campo "Abbrev".
+ - Imprimir el contenido de "GlossSeeAlso".
+ */
+
+/*
+{
+   "glossary":{
+      "title":"example glossary",
+      "GlossDiv":{
+         "title":"S",
+         "GlossList":{
+            "GlossEntry":{
+               "ID":"SGML",
+               "SortAs":"SGML",
+               "GlossTerm":"Standard Generalized Markup Language",
+               "Acronym":"SGML",
+               "Abbrev":"ISO 8879:1986",
+               "GlossDef":{
+                  "para":"A meta-markup language, used to create markup languages such as DocBook.",
+                  "GlossSeeAlso":[
+                     "GML",
+                     "XML"
+                  ]
+               },
+               "GlossSee":"markup"
+            }
+         }
+      }
+   }
+}
+*/
+var glossary ={
+   "glossary":{
+      "title":"example glossary",
+      "GlossDiv":{
+         "title":"S",
+         "GlossList":{
+            "GlossEntry":{
+               "ID":"SGML",
+               "SortAs":"SGML",
+               "GlossTerm":"Standard Generalized Markup Language",
+               "Acronym":"SGML",
+               "Abbrev":"ISO 8879:1986",
+               "GlossDef":{
+                  "para":"A meta-markup language, used to create markup languages such as DocBook.",
+                  "GlossSeeAlso":[
+                  "GML",
+                  "XML"
+                  ]
+               },
+               "GlossSee":"markup"
+            }
+         }
+      }
+   }
+}
+
+// - Imprimir todas las propiedades de GlossDiv
+for(var d in glossary.glossary.GlossDiv){
+   document.write(d+"<br/>");
+};
+
+// - Imprimir el contenido del campo "title".
+
+document.write("<br/>"+glossary.glossary.title);
+
+// - Imprimir el contenido del campo "Abbrev".
+
+document.write("<br/>"+glossary.glossary.GlossDiv.GlossList.GlossEntry.Abbrev);
+// - Imprimir el contenido de "GlossSeeAlso".
+for (var i = 0; i < glossary.glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso.length; i++) {
+   document.write("<br/>"+glossary.glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso[i]);
+}
+
+/*
+ Partiendo del siguiente string JSON obtenido de Youtube, https://www.googleapis.com/youtube/v3/videos?id=sGbxmsDFVnE&key=AIzaSyBrQp_DqWLwtu_H1U9pVQfWGuVijeRlvj8&part=snippet,contentDetails,statistics,status
+ 
+ - Para poder visualizar más claramente la estructura puedes acceder a la siguiente dirección: http://jsonformatter.curiousconcept.com/ 
+   e imprimir entre comentarios el string JSON formateado para que te sirva de referencia para el ejercicio.
+
+HACER LAS SIGUIENTES TAREAS:	
+ - Asignar ese objeto JSON a una variable.
+ - Imprimir el título del video.
+ - Incrustar la imagen de la carátula del video "hqDefault".
+ - Crear un hiperenlace con la imagen anterior que apunte a la URL del video "player"---"default" y que se abra en una nueva ventana.
+ - Imprimir debajo de la imagen la descripción del video.
+ - Imprimir el nombre de quién envió el video "uploader"
+ - Imprimir la categoría del video.
+ - Imprimir la duración del video.
+ - Imprimir la fecha en la que fue enviado el video.
+ - Imprimir el número de Likes que tiene el video.
+ - Imprimir el número de visitas del video.
+ - Imprimir el valor de "embed" (indica si se puede incrustar el video en otras páginas.
+    */
+// - Asignar ese objeto JSON a una variable.
+var video=
+{  
+   "kind":"youtube#videoListResponse",
+   "etag":"\"fpJ9onbY0Rl_LqYLG6rOCJ9h9N8/mYzFqxWhy_8lyMNIxl6lZ_pNUeo\"",
+   "pageInfo":{  
+      "totalResults":1,
+      "resultsPerPage":1
+   },
+   "items":[  
+   {  
+      "kind":"youtube#video",
+      "etag":"\"fpJ9onbY0Rl_LqYLG6rOCJ9h9N8/Y_51CenZE39Zop2lOc0oUpk7LmI\"",
+      "id":"sGbxmsDFVnE",
+      "snippet":{  
+         "publishedAt":"2015-10-20T02:08:38.000Z",
+         "channelId":"UCZGYJFUizSax-yElQaFDp5Q",
+         "title":"Star Wars: The Force Awakens Trailer (Official)",
+         "description":"Watch the official trailer for Star Wars: The Force Awakens, coming to\ntheaters December 18, 2015.\n\nVisit Star Wars at http://www.starwars.com\nSubscribe to Star Wars on YouTube at http://www.youtube.com/starwars\nLike Star Wars on Facebook at http://www.facebook.com/starwars\nFollow Star Wars on Twitter at http://www.twitter.com/starwars\nFollow Star Wars on Instagram at http://www.instagram.com/starwars\nFollow Star Wars on Tumblr at http://starwars.tumblr.com/",
+         "thumbnails":{  
+            "default":{  
+               "url":"https://i.ytimg.com/vi/sGbxmsDFVnE/default.jpg",
+               "width":120,
+               "height":90
+            },
+            "medium":{  
+               "url":"https://i.ytimg.com/vi/sGbxmsDFVnE/mqdefault.jpg",
+               "width":320,
+               "height":180
+            },
+            "high":{  
+               "url":"https://i.ytimg.com/vi/sGbxmsDFVnE/hqdefault.jpg",
+               "width":480,
+               "height":360
+            },
+            "standard":{  
+               "url":"https://i.ytimg.com/vi/sGbxmsDFVnE/sddefault.jpg",
+               "width":640,
+               "height":480
+            },
+            "maxres":{  
+               "url":"https://i.ytimg.com/vi/sGbxmsDFVnE/maxresdefault.jpg",
+               "width":1280,
+               "height":720
+            }
+         },
+         "channelTitle":"Star Wars",
+         "tags":[  
+         "Star Wars (Film Series)",
+         "Star Wars Episode VII (Film)",
+         "the force awakens",
+         "star wars the force awakens",
+         "Trailer",
+         "Official",
+         "Teaser Trailer",
+         "episode vii",
+         "episode 7",
+         "star wars: episode vii"
+         ],
+         "categoryId":"24",
+         "liveBroadcastContent":"none",
+         "localized":{  
+            "title":"Star Wars: The Force Awakens Trailer (Official)",
+            "description":"Watch the official trailer for Star Wars: The Force Awakens, coming to\ntheaters December 18, 2015.\n\nVisit Star Wars at http://www.starwars.com\nSubscribe to Star Wars on YouTube at http://www.youtube.com/starwars\nLike Star Wars on Facebook at http://www.facebook.com/starwars\nFollow Star Wars on Twitter at http://www.twitter.com/starwars\nFollow Star Wars on Instagram at http://www.instagram.com/starwars\nFollow Star Wars on Tumblr at http://starwars.tumblr.com/"
+         }
+      },
+      "contentDetails":{  
+         "duration":"PT2M36S",
+         "dimension":"2d",
+         "definition":"hd",
+         "caption":"false",
+         "licensedContent":true
+      },
+      "status":{  
+         "uploadStatus":"processed",
+         "privacyStatus":"public",
+         "license":"youtube",
+         "embeddable":true,
+         "publicStatsViewable":true
+      },
+      "statistics":{  
+         "viewCount":"36245486",
+         "likeCount":"388572",
+         "dislikeCount":"8438",
+         "favoriteCount":"0",
+         "commentCount":"76680"
+      }
+   }
+   ]
+};
+//- Imprimir el título del video.
+document.write("<br/>título "+video.items[0].snippet.title);
+
+//- Incrustar la imagen de la carátula del video "hqDefault".
+
+//document.write("<br/>Imagen  <img src=\""+video.items[0].snippet.thumbnails.high.url+"\">");
+
+// - Crear un hiperenlace con la imagen anterior que apunte a la URL del video "player"---"default" y que se abra en una nueva ventana.
+document.write("<br/>Enlace: <a target='_blanck' href='https://www.youtube.com/watch?v="+video.items[0].id+"'><img src='"+video.items[0].snippet.thumbnails.high.url+"'>"+"</a>");
+
+ //- Imprimir debajo de la imagen la descripción del video.
+ document.write("<br/><pre>Descripción: "+video.items[0].snippet.localized.description+"</pre>");
+ //- Imprimir el nombre de quién envió el video "uploader"
+ document.write("<br/>No tiene nombre de quien lo envio: "+video.items[0].status.uploadStatus);
+
+ //- Imprimir la categoría del video.
+ document.write("<br/>Categoria "+video.items[0].snippet.categoryId);
+ //- Imprimir la duración del video.
+ document.write("<br/>Duración "+video.items[0].contentDetails.duration);
+ //- Imprimir la fecha en la que fue enviado el video.
+ document.write("<br/>Fecha "+video.items[0].snippet.publishedAt);
+ //- Imprimir el número de Likes que tiene el video.
+ document.write("<br/>Links "+video.items[0].statistics.likeCount);
+ //- Imprimir el número de visitas del video.
+ document.write("<br/>Visitas "+video.items[0].statistics.viewCount);
+ //- Imprimir el valor de "embed" (indica si se puede incrustar el video en otras páginas.
+   document.write("<br/>Embed "+video.items[0].status.embeddable);
+/*
+ Sabiendo que JSON.parse() ,convierte un STRING (JSON) en un objeto.
+
+ Utiliza el siguiente string e imprime el apellido y nombre del contacto.
+
+ var textojson = '{"firstname":"Jesper","surname":"Aaberg","phone":["555-0100","555-0120"]}';
+ */
+ var textojson = '{"firstname":"Jesper","surname":"Aaberg","phone":["555-0100","555-0120"]}';
+ document.write("<br/>"+JSON.parse(textojson).firstname+" "+JSON.parse(textojson).surname);
+/*
+Comprobar si el siguiente contenido estaría formateado correctamente en formato JSON. Utiliza la web http://jsonlint.com/
+para averiguarlo y haz las correcciones oportunas. Pega el resultado correcto a continuación.
+/*
+
+{
+   "name":"Jim Cowart",
+   location:{
+      city:{
+         name:"Chattanooga",
+         population:167674
+      },
+      name: Tennessee,
+      abbreviation:"TN",
+      population:6403000
+   }   state:{
+
+   },
+   company:"appendTo",
+
+}
+
+*/
+
+var correccion={
+   "name":"Jim Cowart",
+   "location":{
+      "city":{
+         "name":"Chattanooga",
+         "population":167674
+      },
+      "name": "Tennessee",
+      "abbreviation":"TN",
+      "population":6403000,
+      "state":null,
+      "company":"appendTo"
+
+   }
+}
+/*
+ Sabiendo que JSON.stringify se encarga de convertir un Objeto a un string JSON. Utiliza dicha función para imprimir el string JSON del siguiente objeto:*/
+ var contacto = new Object();
+ contacto.nombre = "Maria";
+ contacto.apellidos = "Martinez Gonzalez";
+ contacto.telefonos = ["555-0100", "555-0120","555-0127","555-0129"];
+ contacto.masdatos = new Array();
+ contacto.masdatos[0]={"Seat":"Cordoba","Audi":"A100","BMW":"320"};
+ contacto.masdatos[1]=["patinar","ver la tele","escuchar música"];
+ contacto.masdatos[2]=[{"Macbook":"Retina","Imac":"27 pulgadas"},{"OS":"Maverick","OSX":"Lion"}];
+document.write("<br>"+JSON.stringify(contacto));
+
+</script>
+</body>
+</html>
