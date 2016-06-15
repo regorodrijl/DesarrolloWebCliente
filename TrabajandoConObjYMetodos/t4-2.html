@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Tarea 4.2 - Working with user objects and methods in JavaScript</title>
+</head>
+<body>
+	<script>
+		function Edificio(calle,numero,cp,nome){
+			this.calle=calle;
+			this.numero=numero;
+			this.codpost=cp;
+			this.nome=nome;
+			this.plantas= new Array();
+			
+			this.agregarPlantasYPuertas= function (numplantas, numpuertas){
+				var planta = numpuertas+this.plantas.length; 
+				for (var i = this.plantas.length; i < planta; i++) {
+					var puertas=new Array();
+					for (var j = 0;j < numpuertas; j++) {
+						puertas[j]="";
+					};
+					this.plantas[i]=puertas;
+				}
+				document.write("Agregamos "+numplantas+" plantas y "+numpuertas+" puertas al edificio "+this.nome);
+			}
+			this.modificarNumero=function(numero){
+				this.numero=numero;
+			}
+			this.modificarCalle=function(calle){
+				this.calle=calle;
+			}
+			this.modificarCodigoPostal=function(codigo){
+				this.codpost=codigo;
+			}
+			this.imprimeCalle=function(){
+				return this.calle;
+			}
+			this.imprimeNumero=function(){
+				return this.numero;
+			}
+			this.imprimeCodigoPostal=function(){
+				return this.numero;
+			}
+			this.agregarPropietario=function (nombre,planta,puerta){
+				this.plantas[planta][puerta] = nombre;
+			}
+			this.imprimePlantas=function(){
+				document.write("<h3>Listado de propietarios del edificio calle "+this.imprimeCalle()+" numero "+this.imprimeNumero()+"</h3>");
+
+				for (var i = 0; i < edificioA.plantas.length; i++) {
+					for (var j = 0; j <  edificioA.plantas[i].length; j++) {
+						document.write("Propietario del piso "+(j + 1)+" de la planta "+(i+1)+": "+edificioA.plantas[i][j]+"<br/>");
+					}
+				}
+			}
+			document.write("Construido nuevo edificio en calle: "+this.calle+", nº: "+this.numero+", CP: "+this.codpost+".<br/>");
+		}
+////////////////////////////////////////////           fin funcion           ////////////////////////////////////////////////
+var edificioA=new Edificio("Garcia Prieto", 58, 15706,"edificioA");
+var edificioB=new Edificio("Camino Caneiro",29,32004,"edificioB");
+var edificioC=new Edificio("San Clemente","s/n",15705,"edificioC");
+
+document.write("El código postal del edificio A es: "+edificioA.codpost);
+document.write("<br/>La calle del edificio C es: "+edificioC.calle);
+document.write("<br/>El edificio B está situado en la calle "+edificioB.calle+" número "+edificioB.numero+"<br/>");
+edificioA.agregarPlantasYPuertas(2,3);
+edificioA.agregarPropietario("Jose Antonio Lopez",0,0);
+edificioA.agregarPropietario("Luisa Martinez",0,1);
+edificioA.agregarPropietario("Marta Castellón",0,2);
+edificioA.agregarPropietario("Antonio Pereira",1,1);
+edificioA.imprimePlantas();
+edificioA.agregarPlantasYPuertas(1,2);
+edificioA.agregarPropietario("Pedro Mejide",2,1);
+edificioA.imprimePlantas();
+</script>
+
+</body>
+</html>
