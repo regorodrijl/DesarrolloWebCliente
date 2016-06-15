@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Task 4.1 - Trabajando con Arrays y métodos</title>
+</head>
+<body>
+	<script>
+		
+		var array30Aleatorios= new Array();
+		for (var i = 0; i < 30; i++) {
+			//var nAleatorio= Math.round(Math.random()*20);
+			array30Aleatorios.push(Math.round(Math.random()*20));
+		};
+		//document.write(array30Aleatorios.toString());
+		
+		for (i=0;i<array30Aleatorios.length;i++){
+			document.write(array30Aleatorios[i] + " ");
+		}
+		arraySuperheroes=["Batman","Superman","Krusty","Bob","Mel","Barney"];
+		arraySuperheroes.pop();
+		
+		document.write("<br/>Superman ocupa la posicion: "+arraySuperheroes.indexOf("Superman"));
+		arraySuperheroes.push("Carl", "Lenny", "Burns", "Lisa ");
+		arraySuperheroes.sort();
+		arraySuperheroes.slice(3,2);
+		arraySuperheroes.unshift("Manzana", "Melón", "Sandía");
+		miCopia=arraySuperheroes.slice(2,4);
+		miCopia.push("Monitor");
+		tercero= arraySuperheroes.concat(miCopia);
+
+		document.write("<br/>"+tercero.toString());
+		
+	</script>
+</body>
+</html>
