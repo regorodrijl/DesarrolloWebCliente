@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Validation 2</title>
+  <style>
+    .red {  /* Para los mensajes de error */
+     color: red;
+   }
+
+   input.error {  /* Para los input cuando tienen un error */
+     border: 1px red inset;
+     padding: 2px;
+   }
+
+   table {
+     border: 0;
+   }
+
+   td {
+     margin: 0;
+     padding: 3px 10px 3px 3px;
+   }
+ </style>
+</head>
+<body>
+  <h1>JavaScript Form Validation</h1>
+  <form id="formulario" method="get" action="">
+    <table>
+      <tr>
+        <td>Name<span class="red">*</span></td>
+        <td><input type="text" id="name" name="name"/> </td>
+        <td id="nameError" class="red">&nbsp;</td>
+      </tr>
+      <tr>
+        <td>Address</td>
+        <td><input type="text" id="address" name="address" /></td>
+        <td id="addressError" class="red">&nbsp;</td>
+      </tr>
+      <tr>
+        <td>Zip Code<span class="red">*</span></td>
+        <td><input type="text" id="zipcode" name="zipcode" /></td>
+        <td id="zipcodeError" class="red">&nbsp;</td>
+      </tr>
+      <tr>
+        <td>Country<span class="red">*</span></td>
+        <td><select id="country" name="country">
+          <option value="" selected>Please select...</option>
+          <option value="AA">AA</option>
+          <option value="BB">BB</option>
+          <option value="CC">CC</option>
+        </select><br /></td>
+        <td id="countryError" class="red">&nbsp;</td>
+      </tr>
+      <tr>
+        <td>Gender<span class="red">*</span></td>
+        <td><input type="radio" name="gender" value="m" />Male
+          <input type="radio" name="gender" value="f" />Female</td>
+          <td id="genderError" class="red">&nbsp;</td>
+        </tr>
+        <tr>
+          <td>Preferences<span class="red">*</span></td>
+          <td><input type="checkbox" name="color" value="r" />Red
+            <input type="checkbox" name="color" value="g" />Green
+            <input type="checkbox" name="color" value="b" />Blue</td>
+            <td id="colorError" class="red">&nbsp;</td>
+          </tr>
+          <tr>
+            <td>Phone (6 digits)<span class="red">*</span></td>
+            <td><input type="text" id="phone" name="phone" /></td>
+            <td id="phoneError" class="red">&nbsp;</td>
+          </tr>
+          <tr>
+            <td>Email<span class="red">*</span></td>
+            <td><input type="text" id="email" name="email" /></td>
+            <td id="emailError" class="red">&nbsp;</td>
+          </tr>
+          <tr>
+            <td>Password (6-8 characters)<span class="red">*</span></td>
+            <td><input type="password" id="password" name="password" /></td>
+            <td id="passwordError" class="red">&nbsp;</td>
+          </tr>
+          <tr>
+            <td>Verify password<span class="red">*</span></td>
+            <td><input type="password" id="pwVerified" name="pwVerified" /></td>
+            <td id="pwVerifiedError" class="red">&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td><input type="submit" value="SEND" id="bsubmit"/>&nbsp;
+              <input type="reset" value="CLEAR" id="breset"/></td>
+              <td>&nbsp;</td>
+            </tr>
+          </table>
+        </form>
+
+        <script>
+      // Validar el formulario mostrando mensajes de error en cada celda "...Error" correspondiente.
+      // Intentar hacer una función genérica que permita mostrar los mensajes de error en esas celdas.
+      // Todos los campos son obligatorios.
+      // Cuando todos los campos estén validados preguntará si se desea enviar el formulario.
+      function error(id,txt){
+        document.getElementById(id+"Error").innerHTML=txt;
+      }
+
+      document.getElementById("name").addEventListener("blur",function(){
+        if (this.value=="") {
+          error(this.getAttribute("id"),"Escribe algo!!");
+        }else{
+          var reg = /^([a-z ñáéíóú]{2,60})$/;
+          if (!reg.test(this.value)) {
+           error(this.getAttribute("id"),"Escribe algo con mas de 2 caracteres y menos de 60 y sólo letras.!!");
+         }else error(this.getAttribute("id"),"");
+       }
+     },true);
+      document.getElementById("address").addEventListener("blur",function(){
+        if (this.value=="") {
+         error(this.getAttribute("id"),"Escribe alguna dirección!!");
+       }else{
+        var reg = /^([a-z ñáéíóú 0-9]{1,100})$/;
+        if (!reg.test(this.value)) {
+         error(this.getAttribute("id"),"Escribe algo con mas de 10 caracteres y menos de 100 y sólo letras.!!");
+       }else error(this.getAttribute("id"),"");
+     }
+   },true);
+      document.getElementById("zipcode").addEventListener("blur",function(){
+       if (this.value=="") {
+         error(this.getAttribute("id"),"Escribe algún código postal!!");
+       }else{
+        var reg = /^([0-9]{5,5})$/;
+        if (!reg.test(this.value)) {
+         error(this.getAttribute("id"),"Escribe algún código postal correcto, Gracias!!");
+       }else error(this.getAttribute("id"),"");
+     }
+   },true);
+      document.getElementById("country").addEventListener("blur",function(){
+        select=this.selectedIndex;
+        if( select == null || select == 0 ) {
+          error(this.getAttribute("id"),"Selecione uno");
+        }else error(this.getAttribute("id"),"");
+      },true);
+      
+/*
+      for (var i =0; i < document.getElementsByName("gender").length; i++) {
+
+
+        document.getElementsByName("gender")[i].addEventListener("change",function(){
+
+          var contador=0;
+          for (var i = 0; i < document.getElementsByName("gender").length; i++) {
+            if (!document.getElementsByName("gender")[i].checked) 
+              contador++;
+          };
+          if (contador==document.getElementsByName("gender").length) {
+            error("gender","selecciona algo!!");
+          }else error("gender","");
+
+        },true);
+      };
+      */
+      document.getElementById("phone").addEventListener("focusout",function(){
+        if (this.value=="") {
+         error(this.getAttribute("id"),"Escribe un número de teléfono!!");
+       }else{
+        var reg = /^([0-9]{6,6})$/;
+        if (!reg.test(this.value)) {
+         error(this.getAttribute("id"),"Escribe número de teléfono 6 dígitos, Gracias!!");
+       }else error(this.getAttribute("id"),"");
+     }
+   },true);
+      document.getElementById("email").addEventListener("focusout",function(){
+        if (this.value=="") {
+         error(this.getAttribute("id"),"Escribe un email!!");
+       }else{
+        var expReg=/^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+        if (!expReg.test(this.value)) {
+          error(this.getAttribute("id"),"Escribe un mail correcto, Gracias!!");
+        }else error(this.getAttribute("id"),"");
+      }
+    },true);
+      document.getElementById("password").addEventListener("focusout",function(){
+       pass=this.value;
+       if (pass=="") {
+         error(this.getAttribute("id"),"Escribe una contraseña!!");
+       }else{
+         var reg = /^(.{6,8})*$/;
+         if (!reg.test(pass)) {
+           error(this.getAttribute("id"),"Escribe una contraseña correcta (6-8 dígitos)!!");
+         }else error(this.getAttribute("id"),"");
+       }
+     },true);
+      document.getElementById("pwVerified").addEventListener("focusout",function(){
+        if (this.value=="") {
+         error(this.getAttribute("id"),"Escribe una contraseña!!");
+       }else{
+        if(pass===this.value)
+          error(this.getAttribute("id"),"Bien");
+        else error(this.getAttribute("id"),"Contraseña no coincide!!");
+      }
+    },true);
+
+      document.getElementById("formulario").addEventListener("submit",function(e){
+      e.preventDefault();//paramos ejecucion
+      //comprobamos todo
+      var bandera=true;
+      if (document.getElementById("name").value==""||document.getElementById("address").value ===""||document.getElementById("zipcode").value ===""||document.getElementById('country').selectedIndex === 0||document.getElementById("phone").value ===""||document.getElementById("email").value ===""||document.getElementById("password").value ===""||document.getElementById("pwVerified").value ==="") 
+      {//implemnart Errorror
+        if(document.getElementById("name").value==""){
+          bandera=false;
+          error(document.getElementById("name").getAttribute("name"),"Por favor no OMITAS los mensajes!! Escribe algo!!");
+        }
+        if (document.getElementById("address").value=="") {
+          bandera=false;
+          error(document.getElementById("address").getAttribute("name"),"Por favor no OMITAS los mensajes!! Escribe algo!!");
+        }
+        if (document.getElementById("zipcode").value=="") {
+          bandera=false;
+          error(document.getElementById("zipcode").getAttribute("name"),"Por favor no OMITAS los mensajes!! Escribe algo!!");
+        }
+        if (document.getElementById("country").value=="") {
+          select=document.getElementById("country").selectedIndex;
+          if( select == null || select == 0 ) {
+            bandera=false;
+            error(document.getElementById("country").getAttribute("name"),"Por favor no OMITAS los mensajes!! Escribe algo!!"); 
+          }
+        }
+        if (document.getElementById("phone").value=="") {
+          bandera=false;
+          error(document.getElementById("phone").getAttribute("name"),"Por favor no OMITAS los mensajes!! Escribe algo!!");
+        }
+        if (document.getElementById("email").value=="") {
+          bandera=false;
+          error(document.getElementById("email").getAttribute("name"),"Por favor no OMITAS los mensajes!! Escribe algo!!");
+        }
+        if (document.getElementById("password").value=="") {
+          bandera=false;
+          error(document.getElementById("password").getAttribute("name"),"Por favor no OMITAS los mensajes!! Escribe algo!!");
+        }
+        if (document.getElementById("pwVerified").value=="") {
+          bandera=false;
+          error(document.getElementById("pwVerified").getAttribute("name"),"Por favor no OMITAS los mensajes!! Escribe algo!!");
+        }
+
+      }
+      //comprobamos gender
+      var contador=0;
+      for (var i = 0; i < document.getElementsByName("gender").length; i++) {
+        if (!document.getElementsByName("gender")[i].checked) 
+          contador++;
+      };
+      if (contador==document.getElementsByName("gender").length) {
+        bandera=false;
+        error("gender","selecciona algo!!");
+        
+      }else {
+        error("gender","");
+      }
+      if (document.getElementsByName("color")[0].checked||document.getElementsByName("color")[1].checked||document.getElementsByName("color")[2].checked) {
+      }else{ 
+        bandera=false;
+        error(document.getElementsByName("color")[0].getAttribute('name'),"Escoge COLOR!!");
+      }
+
+      ///comprobar datos segun bandera
+      if (bandera==false) {
+        alert("Falta Datos!");
+      }else {
+        var respuesta=confirm("Bien Datos Insertados!!!");
+        if (respuesta) 
+          this.submit();
+        else this.reset();
+      } 
+    },true);
+
+
+</script>
+</body>
+</html>
