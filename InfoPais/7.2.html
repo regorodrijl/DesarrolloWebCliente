@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Sugerencias al estilo Google Suggestions con jQuery</title>
+	<style type="text/css">
+		.enlace_sugerencia_over {
+			background-color: #3366CC;
+		}
+
+		div.zonaconborde {
+			margin-top:5px;
+			margin-left:165px;
+			width:153px;
+			background-color: #FFFFFF; 
+			text-align: left; 
+			border: 1px solid #000000;
+			cursor:pointer;
+		}
+
+		li{
+			list-style: none;
+		}
+
+		body {
+			background-color: #CF9;
+		}
+
+		#pais {
+			font-size: 12px;
+			font-style: italic;
+		}
+	</style> 
+
+</head>
+<body>
+	<strong>Ejemplo de Búsqueda al estilo <a href="https://www.google.com/webhp?hl=es&complete=1" target="_blank">Google Suggest.</a></strong><br />
+	<strong>Nombre del Pais a buscar:</strong>
+	<input type="text" name="pais" id="pais"/> <input type="button" id="buscar" name="buscar" value="Obtener Información" />
+	<div id="zonaresultado"></div>
+</body>
+<script src="../js/jquery-2.2.0.js"></script>
+<script>
+	$("document").ready(function(){
+		$.ajaxSetup({cache:false});// para que no guarde en memoria las peticiones.
+		document.getElementById("pais").focus();
+		$('#pais').keyup(function(){
+			//$.get('sugerir.php',{'nombrepais='+$("#pais").val()});
+			$.ajax({
+				url:'sugerir.php',
+				type:'GET',
+				data:'nombrepais='+$("#pais").val(),
+				success: function(data){
+					//console.log(document.getElementById("pais").value);
+					//console.log(data);
+					if (data) {
+						$('#zonaresultado').html(data).addClass("zonaconborde");
+						
+						$('#zonaresultado li').each(function(){
+							$(this).hover(function(){
+								$(this).addClass("enlace_sugerencia_over");
+								$(this).click(function(){
+									console.log($(this).text());
+									$("#pais").val($(this).text());	
+								});
+							},function(){
+								$(this).removeClass("enlace_sugerencia_over");	
+							});
+						});
+					}
+				}
+			});
+			$("#buscar").click(function(){
+				$("#zonaresultado").removeClass("zonaconborde");
+				//console.log($("#pais").val());
+				$.get('obtenerinfo.php',{nombrepais:$("#pais").val()},function(data){
+					resp=jQuery.parseJSON(data);
+					console.log(resp);
+					str="";
+					$.each(resp, function(key,val){
+						str += key+": "+val+"<br>";
+					});
+					$("#zonaresultado").html(str);
+					//$("#zonaresultado").html("Nombre: "+resp[0]+"<br>Country: "+resp[1]+"<br>Area: "+resp[2]);
+				});
+			});
+		});
+
+});
+</script>
+</html>
