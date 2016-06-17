@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trabajando con Expresiones regulares en JavaScript</title>
+</head>
+<body>
+    <h1>Trabajando con Expresiones regulares en JavaScript</h1>
+    <script>
+            // Programar las siguientes funciones en JavaScript, utilizando expresiones regulares.
+			// Escribe ejemplos de uso de las funciones después de cada función.
+			// Se recomienda utilizar http://regex101.com/ para chequear tus expresiones regulares.
+            // Las funciones deberían devolver true o false, o los datos solicitados.
+
+            //1.- Comprobar si el primer carácter de un string es máyúsculas o no.
+
+            function primerMayuscula(str)
+            {
+                var expReg=/^[A-Z]/;
+                if (expReg.test(str)) 
+                {
+                    return true;
+                }else return false;
+            };
+            document.write(primerMayuscula("Hola")+"<br>");
+            document.write(primerMayuscula("adios")+"<br>");
+
+
+            //2.- Utilizando Prototype, escribir un método para el objeto String con la función anterior.
+            String.prototype.primeraMayuscula= function () {
+                var expReg=/^[A-Z]/;
+                if (expReg.test(this)) {
+                    return true;
+                }else return false;
+            };
+            var strr="Hola";
+            document.write(strr.primeraMayuscula()+"<br>");
+            var strr="hola";
+            document.write(strr.primeraMayuscula()+"<br>");
+
+            //3.- Comprobar si el último carácter de un string es máyúsculas o no.
+
+            function ultimaMay(str){
+                var expReg=/[A-Z]$/;
+                if (expReg.test(str)) {
+                    return true;
+                }else return false;
+            }
+            document.write(ultimaMay("holA")+"<br>");
+            document.write(ultimaMay("holAa")+"<br>");
+
+            //4.- Utilizando Prototype, escribir un método para el objeto String con la función anterior.
+            String.prototype.ultimaMay=function (){
+                var expReg=/[A-Z]$/;
+                if (expReg.test(this)) {
+                    return true;
+                }else return false;
+            }
+            var str1= new String("HolA");
+            document.write(str1.ultimaMay()+"<br>");
+            var str1= new String("Holaa");
+            document.write(str1.ultimaMay()+"<br>");
+            //5.- Comprobar si una tarjeta de crédito está en el siguiente formato: 9999-9999-9999-9999.
+            function tarjetaCredito(tarjeta){
+                var expReg=/^(([0-9]{4}-){3}([0-9]{4}))$/;
+                if (expReg.test(tarjeta)) {
+                  return true;
+              }else return false;
+          }
+          document.write(tarjetaCredito("4215-7353-1693-0010")+"<br>");
+
+
+            //6.- Comprobar si una mátricula está en alguno de los siguientes formatos: 9999-AAA o 9999 AAA.
+            function matricula(matricula){
+                var exprReg=/^[0-9]{4}[-| ][A-Z]{3}$/;
+                if (exprReg.test(matricula)) {
+                    return true;
+                }else return false;
+            }
+            document.write(matricula("3214-ASD")+"<br>");
+            document.write(matricula("3214 ASD")+"<br>");
+
+            //7.- Comprobar si una cadena contiene solamente 2 caracteres (cualquiera).
+
+            function dosCaracteres(palabra){
+                var exprReg=/^.{2}$/;
+                if (exprReg.test(palabra)) {
+                    return true;
+                }else return false;
+            }
+            document.write(dosCaracteres("AS")+"<br>");
+            document.write(dosCaracteres("3214 ASD")+"<br>");
+
+            //8.- Comprobar si una cadena contiene alguno de los caracteres comunes en las siguientes cadenas: pesto pasta pisto, paestxby, etc..
+
+            function cadena(cadena){
+                var exprReg=/^([p].*[st].*)$/;
+                if (exprReg.test(cadena)) {
+                    return true;
+                }else return false;
+            }
+            document.write(cadena("pesto")+"<br>");
+            document.write(cadena("paestxby")+"<br>");
+
+
+            //9.- Comprobar si una expresión contiene la cadena pasta, arroz o salsa.
+            function contieneCadena(cadena){
+                var expReg=/.*(pasta|arroz|salsa).*/;
+                if (expReg.test(cadena)) {
+                    return true;
+                }else return false;
+            }
+            document.write( contieneCadena("hoy salsa pasta  arroz con salsa de tomate")+"<br>");
+            document.write( contieneCadena("no hay comidae")+"<br>");
+
+            //10.- Comprobar si una cadena contiene las siguientes combinaciones: p o pxr
+            function contCad(cadena){
+                var expReg=/.*(p|pxr).*/;
+                if (expReg.test(cadena)) {
+                    return true;
+                }else return false;
+            }
+            document.write(contCad("hoy salsa pasta pxr  arroz con salsa de tomate")+"<br>");
+            document.write(contCad("no hay comidae")+"<br>");
+
+
+            //11.- Utilizando match escribir una función que devuelve el número de vez que "dell" aparece en una cadena.
+
+            function matchDell(cadena){
+                var expReg=/dell/g;
+                var array=cadena.match(expReg);
+
+                console.log(array);
+                return array;
+            }
+            matchDell("compre un dell y ese dell me salio muy bueno.");
+            document.write(matchDell("es como el dell del profe.dell")+"<br>");
+
+
+
+            //12.- Escribe las diferencias entre expresion1 y expresion2 sobre el string str y utilizando el método match.
+            expression1 = /\w+\s/;
+            expression2 = /\w+\s/g;
+            str = "telefonica movistar vodafone and pepephone";
+
+            /*
+            la expresion 1 devuelve solamente la primera ocurrencia que coincida con esa expresion regular, siendo \w ->"" cualquier caracter alfanumerico seguido de"  \s -> "un espacio en blanco".
+            */
+            console.log(str.match(expression1));
+            /*
+            la segunda expresion devuelve cualquier caracater alfanumerico seguido de un espacio las veces que sea.
+            */
+            console.log(str.match(expression2));
+
+            //13.- Devuelve true si encuentra una fecha en una cadena en el formato dd/mm/aaaa o d/m/aaaa, etc..
+            function fecha(fecha){
+                var expReg = /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/\d{4}$/;
+
+                if (expReg.test(fecha)) {
+                    return true;
+                }else return false;
+            }
+            console.log(fecha("21/11/1990"));
+            console.log(fecha("1/1/1990"));
+
+
+
+
+            //14.- Utilizando el método match de un objeto String, extraer el texto entre las etiquetas <b> y </b> e imprimir el contenido.
+
+            function extraer(str){
+               // var expRe=/<b>(.*)<\/b>/g;
+               var expRe =/(<b>|<\/b>)/;
+               var array= str.match(expRe);
+               nuevoStr=str.replace(array,'');
+               console.log(nuevoStr);
+               return nuevoStr;
+           }
+           document.write(extraer("<b>Hola que ase!</b>")+'</br>');
+
+
+            //15.- Utilizando el método match de un objeto String, extraer las etiquetas html dentro de un texto e imprimirlas.
+
+            function etiqueta(str){
+                var expReg=/^<(\w+)>(.*)?<\/(\1)>$/g;
+                var array = str.match(expReg);
+                return array;
+            }
+            console.log(etiqueta("<hr>hola como estas,Corazon!</hr>"));
+
+
+
+            //16.- Utilziando el método match de un objeto String, extraer el texto dentro de cualquier etiqueta e imprimirlo.
+            
+            function etiquetaimprimirlo(str){
+                var expReg=/<(\w+)>(.*)?<\/(\1)>/g;
+                var array = str.match(expReg);
+                document.write(array);
+            }
+            etiquetaimprimirlo("<ha>hola</ha>");
+
+        </script>
+    </body>
+    </html>
