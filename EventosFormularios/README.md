@@ -1,7 +1,7 @@
 Descripción: Seguir instrucciónes de los comentarios:
 
 Sobre la base de código HTML:
-
+~~~
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -44,7 +44,7 @@ Sobre la base de código HTML:
 	</script>
 </body>
 </html>
-
+~~~
 
 Realiza lo siguinte:
 
@@ -100,6 +100,7 @@ Realiza lo siguinte:
 
 Based on HTML code:
 
+~~~
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -130,7 +131,7 @@ Based on HTML code:
 	<div id="comentarios"></div>
 	CLICK <a href="http://www.google.es" id="enlace1">here</a> to go Google.es.<br/>
 	CLICK <a href="#" id="enlace2">here</a> to see the cookies of this document.<br/>
-	CLICK <a href="#" id="enlace3">here</a>to see the cookie stored in localStorage your Browser (HTML5 ).
+	CLICK <a href="#" id="enlace3">here</a> to see the cookie stored in localStorage your Browser (HTML5 ).
 	<hr/>
 	<div id="div1">
 		div1
@@ -139,6 +140,7 @@ Based on HTML code:
 		</div>
 	</div>
 	<script>
+~~~
 
 Does the folowing:
 
