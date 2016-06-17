@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>HTML5 Form</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<h2>Event Programming</h2>
+	<div id="contact-form">
+		<form id="contact" method="get" action="#">
+			<fieldset>	
+				<label for="name">Name</label>
+				<input type="text" name="name" id="name" placeholder="Full Name" title="Write your name" class="required">
+				<label for="email">E-mail</label>
+				<input type="text" name="email" id="email" placeholder="yourname@domain.com" title="Enter your e-mail address" class="required email">
+				<label for="phone">Phone</label>
+				<input type="text" name="phone" id="phone" placeholder="Ej. (555) 555-5555">
+				<label for="website">Sitio Web</label>
+				<input type="text" name="website" id="website" placeholder="http://">
+				<label for="message">Comments</label>
+				<textarea name="message" id="message"></textarea>
+				<input type="submit" name="bsubmit" class="button" id="bsubmit" value="Send Form" />
+			</fieldset>
+		</form>
+	</div>
+	<br/>
+	<div id="comentarios"></div>
+	Pulsa <a href="http://www.google.es" id="enlace1">aquí</a> para ir a Google.es.<br/>
+	Pulsa <a href="#" id="enlace2">aquí</a> para ver las cookies de este documento.<br/>
+	Pulsa <a href="#" id="enlace3">aquí</a>para ver la cookie almacenada en localStorage de tu Navegador (HTML5).
+	<hr/>
+	<div id="div1">
+		div1
+		<div id="div2">div2
+			<div id="div3">div3</div>
+		</div>
+	</div>
+	<script>
+			// Eventos Información: https://developer.mozilla.org/en-US/docs/Web/Reference/Events
+
+			// Programar que al poner el foco en Nombre ponga como color de fondo en dicho campo un color darkseagreen
+			// Ref.: setAttribute en JavaScript.
+			
+			
+			document.getElementById('name').addEventListener('focus',function()
+			{
+				this.setAttribute("style","background:darkseagreen");
+			},true);
+			
+			
+
+			// Programar que cuando pierda el foco en Nombre elimine el color de fondo que había.
+			// Ref.: removeAttribute en JavaScript.
+
+			document.getElementById('name').addEventListener('blur',function()
+			{
+				this.removeAttribute('style');//this.style.background=null;
+			},true);
+
+			
+			// Comprobar que cuando pierda el foco en el campo e-mail valide mediante una expresión regular:
+				// Si el e-mail es incorrecto pondrá el foco en el campo e-mail y un color de fondo tomato. 
+				// En otro caso si es correcto muestra una alerta de E-mail correcto.
+
+				document.getElementById('email').addEventListener('blur',
+					function(){
+						var valor=this.value;
+						var expReg=/^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+						if (valor=="") {
+							alert("Email vacio")
+							this.style.background=null;
+							//this.preventDefault();	
+						}
+						else
+							if (!expReg.test(valor)) {
+								this.setAttribute("style","background:tomato");
+
+								document.getElementById('email').focus();
+							}else{
+								//alert("E-mail correcto");
+								this.style.background=null;
+							}
+						},true);
+
+			// Programar que cuando se produzca un cambio en el campo website valide si se trata de una url.
+				// Mostrará  una alerta si es incorrecta.
+
+				document.getElementById("website").addEventListener('change',function(){
+					var valor=this.value;
+					var expReg=/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+					if (!expReg.test(valor)||valor==""){
+						alert("URL incorrecta.");
+					}
+				},true);
+
+			// Al pasar el ratón por encima del textarea mostrará en el div comentarios si esa casilla no contiene datos el siguiente texto:
+				// "Por favor escriba un comentario en Pregunta/Comentario." y con color de fondo lightgreen.
+				// Cuando el ratón salga del textarea ocultará el div de comentarios. (prop. visibility)
+
+
+				document.getElementById("message").addEventListener('mouseover',
+					function(){
+						var valor=this.value;
+						if (valor==""){
+							var coment="Por favor escriba un comentario en Pregunta/Comentario.";
+							document.getElementById('comentarios').setAttribute("style","background:lightgreen;visibility:visible;");
+							document.getElementById('comentarios').innerHTML= coment;
+						}
+					}
+					,true);
+				document.getElementById("message").addEventListener("mouseout",function(){
+					document.getElementById('comentarios').setAttribute("style","visibility:hidden;");
+
+				},true);
+
+
+			// Al enviar el formulario contact comprobará si tenemos datos en todos los campos y si es OK,
+				// preguntará si queremos enviar el formulario.
+				// Ref.: preventDefault()
+				document.getElementById("contact").addEventListener("submit",function(evento){ //varible evento es un obj de tivo Event de javascript
+					evento.preventDefault();///cancelamos el envio, no se envia
+					if (document.getElementById("name").value==""||document.getElementById("email").value==""||document.getElementById("phone").value==""||document.getElementById("website").value==""||document.getElementById("message").value=="") {
+						alert("Faltan datos.")
+					} else {
+						var respuesta=confirm("Enviar?" );//this.submit();//reset();
+						if (respuesta) {
+							this.submit();
+
+						}else this.reset();
+					}
+				},true);
+
+
+			// Al pulsar en el hiperenlace aquí , nos preguntará si queremos ir a la url indicada en la propiedad href. Si pulsamos aceptar nos conecta con esa url
+			// en otro caso cancelará el evento.
+
+			document.getElementById("enlace1").addEventListener("click",function(evento){
+					var respuesta=confirm("Quieres ir la url Google.es?");//this.submit();//reset();	
+					if (!respuesta) {
+						evento.preventDefault();
+					}; 
+				},true);
+
+
+			// Programar una función alertar que muestre el id del div dónde se hace click.
+			// Que al pulsar en el amarillo (div3) sea el primer evento en dispararse y div2 y div1 los últimos eventos.
+			document.getElementById("div3").addEventListener("click",function(){
+				alert(this.getAttribute("id"));
+			},true);
+			document.getElementById("div2").addEventListener("click",function(){
+				alert(this.getAttribute("id"));
+			},false);
+			document.getElementById("div1").addEventListener("click",function(){
+				alert(this.getAttribute("id"));
+			},false);
+
+
+			// Programar una cookie que se llame usuario y que almacene vuestro nombre y que caduce el 30 de Enero de 2015.
+			var f=new Date(2016,00,30).toUTCString();//toUTCString formato fecha
+			document.cookie = "usuario=Jose luis; expires="+f;
+			document.write(document.cookie);
+			
+			// Al hacer click en el segundo enlace mostrará en una alerta todas las cookies del documento.
+			
+			document.getElementById("enlace2").addEventListener("click",function(){
+				alert(document.cookie);
+			},true);
+
+
+			// Nuevo almacenamiento con HTML5 ---> WebStorage. Pag: 413 del libro "Head First HTML5 Programming"
+			// Programar la siguiente cookie en el LocalStorage:
+			// Con el nombre "visitante" y que almacene vuestro Nombre y apellidos"
+
+
+			localStorage.setItem("visitante","Jose Luis");
+
+
+			// Al hacer click en el enlace localStorage mostrará con una alerta el contenido de la cookie visitante almacenada en el localStorage del Navegador.
+			// Comprobar que funciona cerrando el navegador y volviendo a abrirlo (asegurarse de comentar la línea dónde se almacena la cookie una vez creada, para hacer la prueba).
+			
+			document.getElementById("enlace3").addEventListener("click",function(){
+				alert(localStorage.getItem("visitante"));
+			},true);
+
+		</script>
+	</body>
+	</html>
