@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8"/>
+	<title>jQuery y Tablas</title>
+
+	<style>
+		body,td {
+			font-size: 10pt;
+		}
+		table {
+			background-color: black;
+			border: 1px black solid;
+			border-collapse: collapse;
+		}
+		th {
+			border: 1px outset silver;
+			background-color: maroon;
+			color: white;
+		}
+		tr {
+			background-color: white;
+			margin: 1px;
+		}
+		tr.striped {
+			background-color: coral;
+		}
+		td.amarillos {
+			background-color: yellow;
+		}
+		td {
+			padding: 1px 8px;
+		}
+
+		.encontrados{
+			background-color:green;
+		}
+	</style>
+</head>
+
+<body>
+	<table align="center">
+		<tr>
+			<th>Year</th>
+			<th>Make</th>
+			<th>Model</th>
+		</tr>
+		<tr>
+			<td>1965</td>
+			<td>Ford</td>
+			<td>Mustang</td>
+		</tr>
+		<tr>
+			<td>1970</td>
+			<td>Toyota</td>
+			<td>Corolla</td>
+		</tr>
+		<tr>
+			<td>1979</td>
+			<td>AMC</td>
+			<td>Jeep CJ-5</td>
+		</tr>
+		<tr>
+			<td>1983</td>
+			<td>Ford</td>
+			<td>EXP</td>
+		</tr>
+		<tr>
+			<td>1985</td>
+			<td>Dodge</td>
+			<td>Daytona</td>
+		</tr>
+		<tr>
+			<td>1990</td>
+			<td>Chrysler</td>
+			<td>Jeep Wrangler Sahara</td>
+		</tr>
+		<tr>
+			<td>1995</td>
+			<td>Ford</td>
+			<td>Ranger</td>
+		</tr>
+		<tr>
+			<td>1997</td>
+			<td>Chrysler</td>
+			<td>Jeep Wrangler Sahara</td>
+		</tr>
+		<tr>
+			<td>2000</td>
+			<td>Chrysler</td>
+			<td>Jeep Wrangler Sahara</td>
+		</tr>
+		<tr>
+			<td>2005</td>
+			<td>Chrysler</td>
+			<td>Jeep Wrangler Unlimited</td>
+		</tr>
+		<tr>
+			<td>2007</td>
+			<td>Dodge</td>
+			<td>Caliber R/T</td>
+		</tr>
+	</table>
+
+	<pre>
+		Tarea a realizar.
+		1.- Las filas pares de la tabla utilizarán la clase stripped.
+		2.- Del grupo de celdas impares (sólo desde la 3 hasta la quinta) utilizaran la clase amarillos.
+		3.- Donde encuentre el texto Daytona pondrá la clase encontrados.
+		4.- Crear un div llamado #pruebas con jQuery y ponerlo después de la tabla.
+		5.- Asignarle un ancho de 500px y un alto de 250px.
+		6.- Ponerle al div pruebas un borde de 2px solid.
+		7.- Hacer una copia de toda la tabla y meter la copia dentro del div #pruebas.
+		8.- Crear un botón y programarle que al hacer click oculte la tabla de datos mediante hide y a velocidad lenta.
+
+	</pre>
+	<script src="../../js/jquery-2.2.0.js"></script>
+	<script>
+		$(document).ready(function(){
+			// Apdo.1
+			$("tr:nth-child(even)").addClass("striped");
+			//$("td:even").addClass("striped");
+			// Apdo.2
+			$("td:odd").slice(2,6).addClass("amarillos");
+			// Apdo.3
+			$('td:contains("Daytona")').addClass("encontrados");
+			// Apdo.4
+			$("table").after("<div  id='pruebas' name='pruebas'>hola </div>");
+			// Apdo.5 - 6 
+			$("#pruebas").css({"width":"500px","height":"250px","border":"2px solid"});
+			// Apdo.7
+			$("table").clone().appendTo("#pruebas");
+			// Apdo.8
+			$("#pruebas").after("<button id='btn'>Botón</button>");
+			$("#btn").click(function(){
+				$("table:first").hide("slow");
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8"/>
+	<title>jQuery 6 - Insertando registros con jQuery</title>
+
+	<style type="text/css">
+		.error{
+			background-color: #CC3333;
+		}	
+		.correcto{
+			background-color: #00CCCC;
+		}
+		#mensajes{
+			width: 300px;
+			margin: 10px auto;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="formulario" align="center">
+		<label>Introduzca Pais <input type="text" name="pais" id="pais"></label>
+		<input type="button" id="boton" value="Enviar" name="boton">
+	</div>
+	<div id="mensajes"></div>
+</body>
+<script src="../../js/jquery-2.2.0.js"></script>
+<script type="text/javascript">
+	$('document').ready(function(){
+		$('#boton').click(function(){
+			if ($('#pais').val()=="") {
+				alert("Escribe un nombre de Pais");
+			}else {
+				nombrePais = $('#pais').val();
+				$.post('insertar.php',{pais:nombrePais},function(respuesta){
+
+					if(respuesta=="ok"){
+						/*$("#mensajes").hide().html("insertado!").addClass("correcto").fadeIn("slow",function(){
+							$(this).delay(1000).fadeOut("slow");
+						});*/
+
+				$("#mensajes").hide().html("insertado!").addClass("correcto").fadeIn("slow").delay(1000).fadeOut("slow",function(){
+					$('#pais').val("");
+					$(this).removeClass("correcto");
+				});
+
+
+
+			}else{
+				$("#mensajes").hide().html("No insertado!").addClass("error").fadeIn("slow",function(){
+					$(this).delay(1000).fadeOut("slow",function(){
+						$('#pais').val("");
+						$(this).removeClass("error");
+					});
+				});
+						//$("#mensajes").html("No insertado!").addClass("error").fadeOut("slow");
+						//$("#mensajes").removeClass('error');
+					}
+				});
+			}
+		});
+	});
+</script>
+</html>

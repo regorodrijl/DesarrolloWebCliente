@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8"/>
+	<title>jQuery Enlaces</title>
+</head>
+<body>
+	<p align="center"><strong>Seccion de Enlaces</strong></p>
+	<p align="center"><a href="http://www.xunta.es">http://www.xunta.es</a></p>
+	<p align="center"><a href="http://www.xataka.com/">http://www.xataka.com</a></p>
+	<p align="center"><a href="http://www.hotmail.com">http://www.hotmail.com</a></p>
+	<p align="center"><a href="http://media-cdn.tripadvisor.com/media/photo-s/01/04/61/1c/elephant-oregon-zoo.jpg">Elefante del zoo de Oregon</a></p>
+	<p align="center"><a href="http://www.irs.gov/pub/irs-pdf/fw4.pdf">Form W-4 (pdf) del gobierno</a></p>
+	<p align="center"><a href="http://informatica.iessanclemente.net">http://informatica.iessanclemente.net</a></p>
+	<p align="center"><a href="http://www.isciii.es/ISCIII/es/contenidos/fd-el-instituto/fd-administracion-gestion/fd-empleo/fd-personal-funcionario/fd-concursos-traslado/fd-pdfs/03-02-14-concurso-espec-isciii-ECC-123-2014-BOEpdf.pdf">Concurso Provisión de puestos de trabajo</a></p>
+	<p align="center"><a href="http://www.gingliders.com/assets/images/gliders/gallery/_resampled/SetWidth900-boomerang9-gall03.jpg">Parapente Gin Boomerang X</a></p>
+	<p align="center">&nbsp;</p>
+	<hr>
+	<div align="center" id="resultado"></div>
+
+	<pre>
+		Tareas a realizar:
+
+		1.- Todos os enlaces a p&aacute;xinas de Espa&ntilde;a ter&aacute;n fondo amarelo.
+		2.- Todos os enlaces que apunten a direccións que comenzen por calquera cousa diferente a www terán un fondo verde.
+		3.- Ó facer click nun enlace  que apunte a un arquivo pdf amosará unha alerta indicando que é necesario un visor pdf para ver ese arquivo.
+		Se confirmamos a mensaxe nos conectará có arquivo,senón non fará nada.
+		4.- Ó pasa-lo rato por riba dunha hiperenlace que apunte a jpg, amosará a imaxe no div #resultado situado na parte inferior do documento.
+	</pre>
+</body>
+<script src="../../js/jquery-2.2.0.js"></script>
+<script>
+	// Apto.1
+	$("a[href$='.es']").css({"background-color": "yellow"});
+	// Apto.2
+	$("a").not("[href^='http://www.']").css({"background-color":"green"});
+	//Apdo.3
+	$("a[href$='.pdf']").click(function(e){
+		e.preventDefault();
+		if(confirm("Precisase visor PDF.")){
+			url = $(this).attr("href");
+			open(url, '_blank');
+		}
+	});
+	// Apdo.4
+	$("a[href$='.jpg']").hover(function(e){
+		var imadasg = $(this).attr("href");//.append("#resultado");
+		$("#resultado").html("<img src='"+imadasg+"'>");
+	},function(){
+		$("#resultado").html("");
+	});
+</script>
+
+</html>

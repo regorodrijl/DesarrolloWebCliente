@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8"/>
+	<title>jQuery Estilos a los Enlaces</title>
+	<style type="text/css">
+		#enlaces {
+			margin: 10px auto;
+			width: 560px;
+			font: 12px Verdana;
+		}
+
+		#enlaces a {
+			color:#D54E21;
+			padding-top:3px;
+			text-decoration:none;
+		}
+
+		.pdf {
+			padding-left: 20px;
+			background: transparent url(icono-pdf.png) left top no-repeat;
+		}
+
+		.zip {
+			padding-left: 20px;
+			background: transparent url(icono-zip.png) left top no-repeat;
+		}
+
+		.doc {
+			padding-left: 20px;
+			background: transparent url(icono-doc.png) left top no-repeat;
+		}
+
+		.externo {
+			padding-left: 20px;
+			background: transparent url(icono-ext.png) left top no-repeat;
+		}
+	</style>
+
+</head>
+<body>
+	<div id="enlaces">
+		<p><a href="documento.pdf" name="rafa">Enlace a arquivo PDF</a></p>
+		<p><a href="documento.zip">Enlace a archivo ZIP</a></p>
+		<p><a href="documento.doc">Enlace a archivo DOC</a></p>
+		<p><a href="http://www.xunta.es">Enlace externo - Xunta de Galicia</a></p>
+		<p><a href="http://www.google.es">Enlace externo - Páxina de Google</a></p>
+		<p><a href="http://informatica.iessanclemente.net">Páxina do Dpto. Informática IES San Clemente</a></p>
+		<p><a href="#enlaces">Enlace local #</a></p>
+	</div>
+</body>
+<script src="../../js/jquery-2.2.0.js"></script>
+<script>
+	$(document).ready(function(){
+		$("a[href$='.pdf']").addClass("pdf");
+		$("a[href$='.zip']").addClass("zip");
+		$("a[href$='.doc']").addClass("doc");
+		$("a[href^='http://']").addClass("externo");
+	});
+</script>
+</html>
